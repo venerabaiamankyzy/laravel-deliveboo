@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Generator as Faker;
+use App\Models\Dish;
 use Illuminate\Database\Seeder;
 
 class DishSeeder extends Seeder
@@ -12,8 +14,16 @@ class DishSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        //
+        for($i = 0; $i < 20; $i++) {
+            $dish = new Dish;
+            $dish->name = $faker->words(2, true);
+            $dish->description = $faker->paragraph();
+            $dish->price = $faker->randomFloat(2, 0, 100);
+            $dish->photo = 'https://picsum.photos/500/300';
+            $dish->is_visible = $faker->boolean();
+            $dish->save();
+        }
     }
 }
