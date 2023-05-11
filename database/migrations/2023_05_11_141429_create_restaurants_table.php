@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->char('vat_number', 11)->unique();
             $table->string('phone_number', 15);
-            $table->string('description');
+            $table->text('description');
             $table->string('photo')->nullable();
             $table->timestamps();
         });
