@@ -24,4 +24,6 @@ class Restaurant extends Model
     public function types() {
         return $this->belongsToMany(Type::class);
     }
+
+    protected $fillable = ["id", "user_id", "name", "address", "vat_number", "phone_number", "description", "photo"];
 }
