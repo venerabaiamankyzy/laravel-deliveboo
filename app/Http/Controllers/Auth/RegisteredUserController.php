@@ -44,9 +44,13 @@ class RegisteredUserController extends Controller
         ]);
 
         $restaurant = Restaurant::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'user_id' => $user->id,
+            'name' => $request->company_name,
+            'address' => $request->address,
+            'vat_number' => $request->vat_number,
+            'phone_number' => $request->phone_number,
+            'description' => $request->description,
+            'photo' => $request->photo,
         ]);
 
         event(new Registered($user));
