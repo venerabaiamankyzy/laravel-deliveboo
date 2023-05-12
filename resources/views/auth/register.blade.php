@@ -140,23 +140,20 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="mb-4 row">
+                            <div class="mb-4 row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">
                                     {{ __('Tipologia') }}
                                 </label>
 
-                                <div class="col-md-6">
-                                    <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div> --}}
+                                @foreach ($types as $type)
+                                    <div class="col-3">
+                                        <input type="checkbox" id="types-{{ $type->id }}" value="{{ $type->id }}"
+                                            name="types[]" class="form-check-control"
+                                            @if (in_array($type->id, old('types', $restaurant_type ?? []))) checked @endif>
+                                        <label for="types{{ $type->id }}">{{ $type->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
 
                             <div class="mb-4 row">
                                 <label for="phone_number" class="col-md-4 col-form-label text-md-right">
@@ -165,8 +162,9 @@
 
                                 <div class="col-md-6">
                                     <input id="phone_number" type="text"
-                                        class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
-                                        value="{{ old('phone_number') }}" required autocomplete="phone_number" autofocus>
+                                        class="form-control @error('phone_number') is-invalid @enderror"
+                                        name="phone_number" value="{{ old('phone_number') }}" required
+                                        autocomplete="phone_number" autofocus>
 
                                     @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
