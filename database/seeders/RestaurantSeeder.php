@@ -18,6 +18,7 @@ class RestaurantSeeder extends Seeder
     {
         for($i = 0; $i < 20; $i++) {
             $restaurant = new Restaurant;
+            $restaurant->user_id = '1';
             $restaurant->name = $faker->company();
             $restaurant->address = $faker->streetAddress();
             $restaurant->vat_number = $faker->numberBetween(10000000000, 99999999999);

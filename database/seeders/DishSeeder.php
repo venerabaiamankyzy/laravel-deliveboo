@@ -18,6 +18,7 @@ class DishSeeder extends Seeder
     {
         for($i = 0; $i < 20; $i++) {
             $dish = new Dish;
+            $dish->restaurant_id = $faker->numberBetween(1, 20);
             $dish->name = $faker->words(2, true);
             $dish->description = $faker->paragraph();
             $dish->price = $faker->randomFloat(2, 0, 100);

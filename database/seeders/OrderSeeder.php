@@ -18,6 +18,7 @@ class OrderSeeder extends Seeder
     {
         for($i = 0; $i < 20; $i++) {
             $order = new Order;
+            $order->restaurant_id = $faker->numberBetween(1, 20);
             $order->customer_name = $faker->firstNameMale();
             $order->customer_surname = $faker->firstNameFemale();
             $order->customer_mail = $faker->email();
