@@ -21,7 +21,7 @@ class DishOrderSeeder extends Seeder
         $orders = Order::all();
 
         foreach ($orders as $order) {
-            $order->dishes()->attach($faker->randomElements($dishes, random_int(0, 10)));
+            $order->dishes()->attach($faker->randomElements($dishes, random_int(1, 10)));
         }
     }
 }
