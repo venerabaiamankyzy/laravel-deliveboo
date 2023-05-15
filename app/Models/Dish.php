@@ -9,6 +9,7 @@ class Dish extends Model
 {
     use HasFactory;
 
+    // RELATIONS
     public function restaurant() {
         return $this->belongsTo(Restaurant::class);
     }
@@ -17,6 +18,22 @@ class Dish extends Model
         return $this->belongsToMany(Order::class);
     }
 
+    // MUTATORS
+    protected function getCreatedAtAttribute($value)
+    {
+        return date('d/m/y h:i', strtotime($value));
+    }
+
+    protected function getUpdatedAtAttribute($value)
+    {
+        return date('d/m/y H:i', strtotime($value));
+    }
+
+    public function getAbstract($max = 50) {
+        return substr($this->description, 0, $max). "...";
+    }
+
+    // FILLABLE
     protected $fillable = [
         'restaurant_id',
         'name',
@@ -25,4 +42,6 @@ class Dish extends Model
         'is_visible',
         'photo',
     ];
+
+
 }

@@ -2,21 +2,21 @@
 
 @section('content')
   <div class="container">
-    <form class="mt-5" action="{{ route('admin.dishes.store') }}" method="post" enctype="multipart/form-data">
+    <h2 class="mt-4">Aggiungi piatto</h2>
+
+    <div class="my-4">
+      <a href="{{ route('admin.dishes.index') }}" type="submit" class="btn btn-primary ms-auto">Torna alla lista</a>
+    </div>
+
+    <form class="mt-2" action="{{ route('admin.dishes.store') }}" method="post" enctype="multipart/form-data">
       @csrf
 
-      {{-- name
-      description
-      price
-      photo
-      is_visible --}}
-
       <div class="mb-4 row">
-        <label for="name" class="col-md-4 col-form-label text-md-right">
+        <label for="name" class="col-md-2 col-form-label text-md-right">
           {{ __('Nome piatto') }}
         </label>
 
-        <div class="col-md-6">
+        <div class="col-md-10">
           <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
             value="{{ old('name') }}" required autocomplete="name" autofocus>
 
@@ -29,11 +29,11 @@
       </div>
 
       <div class="mb-4 row">
-        <label for="description" class="col-md-4 col-form-label text-md-right">
+        <label for="description" class="col-md-2 col-form-label text-md-right">
           {{ __('Descrizione') }}
         </label>
 
-        <div class="col-md-6">
+        <div class="col-md-10">
           <textarea id="description" type="text" rows="5" class="form-control @error('description') is-invalid @enderror"
             name="description" value="{{ old('description') }}" required autocomplete="description" autofocus></textarea>
 
@@ -46,19 +46,19 @@
       </div>
 
       <div class="mb-4 row">
-        <label for="price" class="col-md-4 col-form-label text-md-right">
+        <label for="price" class="col-md-2 col-form-label text-md-right">
           {{ __('Prezzo') }}
         </label>
 
-        <div class="col-md-6">
+        <div class="col-md-10">
           <div class="input-group">
             <span class="input-group-text">€</span>
-            <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price"
-              value="{{ old('price') }}" required autocomplete="price" autofocus>
+            <input id="price" type="number" step="0.01" class="form-control @error('price') is-invalid @enderror"
+              name="price" value="{{ old('price') }}" required autocomplete="price" autofocus>
           </div>
 
           @error('price')
-            <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback d-block" role="alert">
               <strong>{{ $message }}</strong>
             </span>
           @enderror
@@ -66,7 +66,7 @@
       </div>
 
       <div class="mb-4 row">
-        <label for="name" class="col-md-4 col-form-label text-md-right">
+        <label for="is_visible" class="col-md-2 col-form-label text-md-right">
           {{ __('Visibile') }}
         </label>
 
@@ -77,11 +77,11 @@
       </div>
 
       <div class="mb-4 row">
-        <label for="photo" class="col-md-4 col-form-label text-md-right">
+        <label for="photo" class="col-md-2 col-form-label text-md-right">
           {{ __('Foto') }}
         </label>
 
-        <div class="col-md-6">
+        <div class="col-md-10">
           <input id="photo" type="text" class="form-control @error('photo') is-invalid @enderror" name="photo"
             value="{{ old('photo') }}" required autocomplete="photo" autofocus>
 
@@ -93,7 +93,9 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary">Crea</button>
+      <div class="d-flex">
+        <button type="submit" class="btn btn-success ms-auto">Aggiungi</button>
+      </div>
     </form>
   </div>
 @endsection

@@ -19,6 +19,14 @@ class DishController extends Controller
     {
         $dishes = Dish::where('restaurant_id', Auth::id())->get();
 
+        // $results = [];
+        // $response = file_get_contents('https://pixabay.com/api/?key=36421115-17c585d164b97ca0858bcc2f4&q=piatto+cibo&image_type=photo&pretty=true&lang=it');
+        // $response = json_decode($response);
+
+        // $results = $response->hits;
+
+        // dd($results[0]);
+
         return view('admin.dishes.index', compact('dishes'));
     }
 
@@ -41,6 +49,25 @@ class DishController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
+        $request->validate([
+            'name' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'price' => ['required', 'numeric', 'between:0,9999.99'],
+            'photo' => ['required', 'string'],
+        ], [
+            'name.required' => 'Il campo nome è obbligatorio',
+            'name.string' => 'Il campo nome deve essere una stringa',
+            'description.required' => 'Il campo descrizione è obbligatorio',
+            'description.string' => 'Il campo descrizione deve essere una stringa',
+            'price.required' => 'Il campo prezzo è obbligatorio',
+            'price.numeric' => 'Il campo prezzo deve essere un numero',
+            'price.between' => 'Il campo prezzo deve essere compreso tra :min e :max',
+            'photo.required' => 'Il campo foto è obbligatorio',
+            'photo.string' => 'Il campo foto deve essere una stringa',
+        ]);
+        
+
         if (!$request->has('is_visible')) $data['is_visible'] = 0;
         $data['restaurant_id'] = Auth::id();
 
