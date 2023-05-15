@@ -11,10 +11,10 @@
     </div>
 
     <form class="mt-2 border border-dark p-4" action="{{ route('admin.dishes.store') }}" method="post"
-      enctype="multipart/form-data">
+      enctype="multipart/form-data" style="background-color: #f5f5f5">
       @csrf
 
-      <div class="mb-4 row">
+      <div class="mb-2 row">
         <label for="name" class="col-md-2 col-form-label text-md-right">
           {{ __('Nome piatto') }}
         </label>
@@ -30,8 +30,8 @@
           @enderror
         </div>
       </div>
-
-      <div class="mb-4 row">
+      <hr>
+      <div class="mb-2 row">
         <label for="description" class="col-md-2 col-form-label text-md-right">
           {{ __('Descrizione') }}
         </label>
@@ -47,8 +47,8 @@
           @enderror
         </div>
       </div>
-
-      <div class="mb-4 row">
+      <hr>
+      <div class="mb-2 row">
         <label for="price" class="col-md-2 col-form-label text-md-right">
           {{ __('Prezzo') }}
         </label>
@@ -67,8 +67,8 @@
           @enderror
         </div>
       </div>
-
-      <div class="mb-4 row">
+      <hr>
+      <div class="mb-2 row">
         <label for="is_visible" class="col-md-2 col-form-label text-md-right">
           {{ __('Visibile') }}
         </label>
@@ -78,8 +78,8 @@
             {{ old('is_visible') }}>
         </div>
       </div>
-
-      <div class="mb-4 row">
+      <hr>
+      <div class="mb-2 row">
         <label for="photo" class="col-md-2 col-form-label text-md-right">
           {{ __('Foto') }}
         </label>
@@ -96,7 +96,7 @@
         </div>
       </div>
 
-      <div class="d-flex">
+      <div class="d-flex mt-3">
         <button type="submit" class="btn btn-success ms-auto">
           Aggiungi
           <i class="bi bi-patch-plus-fill"></i>

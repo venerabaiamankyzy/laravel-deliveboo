@@ -18,7 +18,7 @@
           <th scope="col">Prezzo</th>
           <th scope="col">Ultima modifica</th>
           <th scope="col" class="text-center">Visibile</th>
-          <th scope="col">Azioni</th>
+          <th scope="col" class="text-end">Azioni</th>
         </tr>
       </thead>
       <tbody>
@@ -36,7 +36,7 @@
                 <i class="bi bi-eye-slash-fill text-danger"></i>
               @endif
             </td>
-            <td>
+            <td class="text-end">
               <a href="{{ route('admin.dishes.show', $dish->id) }}" class="bi bi-box-arrow-in-up-right"></a>
             </td>
           </tr>

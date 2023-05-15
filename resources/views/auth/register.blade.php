@@ -5,18 +5,20 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">{{ __('Register') }}</div>
+          <div class="card-header">{{ __('Registrazione') }}</div>
 
           <div class="card-body">
             <form method="POST" action="{{ route('register') }}">
               @csrf
+
+              <h3 class="mb-4">Registrazione utente</h3>
 
               <div class="mb-4 row">
                 <label for="name" class="col-md-4 col-form-label text-md-right">
                   {{ __('Nome titolare') }}
                 </label>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                     name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
@@ -29,9 +31,9 @@
               </div>
 
               <div class="mb-4 row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo email') }}</label>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                     name="email" value="{{ old('email') }}" required autocomplete="email">
 
@@ -46,7 +48,7 @@
               <div class="mb-4 row">
                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                     name="password" required autocomplete="new-password">
 
@@ -60,33 +62,22 @@
 
               <div class="mb-4 row">
                 <label for="password-confirm"
-                  class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                  class="col-md-4 col-form-label text-md-right">{{ __('Conferma password') }}</label>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required
                     autocomplete="new-password">
                 </div>
               </div>
 
-              <hr>
-              <hr>
-              <hr>
-              <hr>
-              <hr>
-              <hr>
-              <hr>
-              <hr>
-              <hr>
-              <hr>
-              <hr>
-              <hr>
+              <h3 class="my-4">Registrazione ristorante</h3>
 
               <div class="mb-4 row">
                 <label for="company_name" class="col-md-4 col-form-label text-md-right">
                   {{ __('Nome attività') }}
                 </label>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <input id="company_name" type="text" class="form-control @error('company_name') is-invalid @enderror"
                     name="company_name" value="{{ old('company_name') }}" required autocomplete="company_name" autofocus>
 
@@ -103,7 +94,7 @@
                   {{ __('Indirizzo attività') }}
                 </label>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <input id="address" type="text" class="form-control @error('address') is-invalid @enderror"
                     name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
 
@@ -120,33 +111,37 @@
                   {{ __('Partita IVA') }}
                 </label>
 
-                <div class="col-md-6 input-group">
-                  <span class="input-group-text" id="basic-addon1">IT</span>
-                  <input id="vat_number" type="text" maxlength="11"
-                    class="form-control @error('vat_number') is-invalid @enderror" name="vat_number"
-                    value="{{ old('vat_number') }}" required autocomplete="vat_number" autofocus>
+                <div class="col-md-8">
+                  <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">IT</span>
+                    <input id="vat_number" type="text" maxlength="11"
+                      class="form-control @error('vat_number') is-invalid @enderror" name="vat_number"
+                      value="{{ old('vat_number') }}" required autocomplete="vat_number" autofocus>
 
-                  @error('vat_number')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                  @enderror
+                    @error('vat_number')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
+                  </div>
                 </div>
               </div>
 
               <div class="mb-4 row">
-                <div class="form-check">
+                <div>
                   <label for="name" class="col-md-4 col-form-label text-md-right">
                     {{ __('Tipologia') }}
                   </label>
 
-                  @foreach ($types as $type)
-                    <div class="col-3">
-                      <input type="checkbox" id="types-{{ $type->id }}" value="{{ $type->id }}" name="types[]"
-                        class="form-check-control" @if (in_array($type->id, old('types', $restaurant_type ?? []))) checked @endif>
-                      <label for="types-{{ $type->id }}">{{ $type->name }}</label>
-                    </div>
-                  @endforeach
+                  <div class="row">
+                    @foreach ($types as $type)
+                      <div class="col-3 my-1">
+                        <input type="checkbox" id="types-{{ $type->id }}" value="{{ $type->id }}"
+                          name="types[]" class="form-check-input" @if (in_array($type->id, old('types', $restaurant_type ?? []))) checked @endif>
+                        <label for="types-{{ $type->id }}">{{ $type->name }}</label>
+                      </div>
+                    @endforeach
+                  </div>
 
                   @error('types')
                     <span class="invalid-feedback d-block" role="alert">
@@ -161,7 +156,7 @@
                   {{ __('Numero di telefono') }}
                 </label>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <input id="phone_number" type="text" maxlength="11"
                     class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
                     value="{{ old('phone_number') }}" required autocomplete="phone_number" autofocus>
@@ -179,7 +174,7 @@
                   {{ __('Descrizione') }}
                 </label>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <textarea id="description" type="text" class="form-control @error('description') is-invalid @enderror"
                     name="description" value="{{ old('description') }}" autocomplete="description" autofocus rows="10"></textarea>
 
@@ -196,7 +191,7 @@
                   {{ __('Foto') }}
                 </label>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <input id="photo" type="text" class="form-control @error('photo') is-invalid @enderror"
                     name="photo" value="{{ old('photo') }}" autocomplete="photo" autofocus>
 
@@ -209,9 +204,9 @@
               </div>
 
               <div class="mb-4 row">
-                <div class="col-md-6 offset-md-4">
-                  <button type="submit" class="btn btn-primary">
-                    {{ __('Register') }}
+                <div class="d-flex">
+                  <button type="submit" class="btn btn-primary ms-auto">
+                    {{ __('Registrati') }}
                   </button>
                 </div>
               </div>
