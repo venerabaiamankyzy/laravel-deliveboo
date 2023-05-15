@@ -16,4 +16,13 @@ class Dish extends Model
     public function orders() {
         return $this->belongsToMany(Order::class);
     }
+
+    protected $fillable = [
+        'restaurant_id',
+        'name',
+        'description',
+        'price',
+        'is_visible',
+        'photo',
+    ];
 }

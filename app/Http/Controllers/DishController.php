@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Dish;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
 class DishController extends Controller
@@ -14,7 +17,9 @@ class DishController extends Controller
      */
     public function index()
     {
-        //
+        $dishes = Dish::where('restaurant_id', Auth::id())->get();
+
+        return view('admin.dishes.index', compact('dishes'));
     }
 
     /**
@@ -24,7 +29,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.dishes.create');
     }
 
     /**
@@ -35,7 +40,15 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        if (!$request->has('is_visible')) $data['is_visible'] = 0;
+        $data['restaurant_id'] = Auth::id();
+
+        $dish = new Dish;
+        $dish->fill($data);
+        $dish->save();
+
+        return to_route('admin.dishes.index');
     }
 
     /**
