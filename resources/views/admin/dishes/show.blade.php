@@ -39,7 +39,7 @@
             </label>
 
             <div class="col-md-8">
-              <p class="col-form-label">€{{ $dish->price }}</p>
+              <p class="col-form-label">€{{ number_format((float) $dish->price, 2, '.', '') }}</p>
             </div>
           </div>
           <hr>
