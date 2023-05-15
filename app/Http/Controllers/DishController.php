@@ -19,14 +19,6 @@ class DishController extends Controller
     {
         $dishes = Dish::where('restaurant_id', Auth::id())->get();
 
-        // $results = [];
-        // $response = file_get_contents('https://pixabay.com/api/?key=36421115-17c585d164b97ca0858bcc2f4&q=piatto+cibo&image_type=photo&pretty=true&lang=it');
-        // $response = json_decode($response);
-
-        // $results = $response->hits;
-
-        // dd($results[0]);
-
         return view('admin.dishes.index', compact('dishes'));
     }
 
@@ -86,7 +78,7 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        //
+        return view('admin.dishes.show', compact('dish'));
     }
 
     /**

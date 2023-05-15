@@ -18,6 +18,7 @@
           <th scope="col">Prezzo</th>
           <th scope="col">Ultima modifica</th>
           <th scope="col" class="text-center">Visibile</th>
+          <th scope="col">Azioni</th>
         </tr>
       </thead>
       <tbody>
@@ -35,10 +36,13 @@
                 <i class="bi bi-eye-slash-fill text-danger"></i>
               @endif
             </td>
+            <td>
+              <a href="{{ route('admin.dishes.show', $dish->id) }}" class="bi bi-box-arrow-in-up-right"></a>
+            </td>
           </tr>
         @empty
           <tr>
-            <td class="text-center" colspan="6">Nessun piatto trovato</td>
+            <td class="text-center" colspan="7">Nessun piatto trovato</td>
           </tr>
         @endforelse
       </tbody>
