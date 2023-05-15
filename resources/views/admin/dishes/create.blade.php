@@ -5,10 +5,13 @@
     <h2 class="mt-4">Aggiungi piatto</h2>
 
     <div class="my-4">
-      <a href="{{ route('admin.dishes.index') }}" type="submit" class="btn btn-primary ms-auto">Torna alla lista</a>
+      <a href="{{ route('admin.dishes.index') }}" type="submit" class="btn btn-primary ms-auto">
+        <i class="bi bi-arrow-bar-left"></i>
+        Torna alla lista</a>
     </div>
 
-    <form class="mt-2" action="{{ route('admin.dishes.store') }}" method="post" enctype="multipart/form-data">
+    <form class="mt-2 border border-dark p-4" action="{{ route('admin.dishes.store') }}" method="post"
+      enctype="multipart/form-data">
       @csrf
 
       <div class="mb-4 row">
@@ -94,7 +97,10 @@
       </div>
 
       <div class="d-flex">
-        <button type="submit" class="btn btn-success ms-auto">Aggiungi</button>
+        <button type="submit" class="btn btn-success ms-auto">
+          Aggiungi
+          <i class="bi bi-patch-plus-fill"></i>
+        </button>
       </div>
     </form>
   </div>

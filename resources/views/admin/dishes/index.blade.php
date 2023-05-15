@@ -9,7 +9,7 @@
       <a href="{{ route('admin.dishes.create') }}" type="button" class="btn btn-success ms-auto">Aggiungi piatto</a>
     </div>
 
-    <table class="table table-striped mt-2">
+    <table class="table table-striped mt-2 border border-dark">
       <thead>
         <tr>
           <th scope="col">ID</th>
