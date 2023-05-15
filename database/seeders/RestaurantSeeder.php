@@ -25,23 +25,11 @@ class RestaurantSeeder extends Seeder
             $restaurant->user_id = $user;
             $restaurant->name = $faker->company();
             $restaurant->address = $faker->streetAddress();
-            $restaurant->vat_number = $faker->vat();
+            $restaurant->vat_number = substr($faker->vat(), 2);
             $restaurant->phone_number = $faker->numberBetween(3000000000, 3999999999);
             $restaurant->description = $faker->paragraph();
             $restaurant->photo = 'https://picsum.photos/500/300';
             $restaurant->save();
         }
-
-        // for($i = 0; $i < 20; $i++) {
-        //     $restaurant = new Restaurant;
-        //     $restaurant->user_id = '1';
-        //     $restaurant->name = $faker->company();
-        //     $restaurant->address = $faker->streetAddress();
-        //     $restaurant->vat_number = $faker->vat();
-        //     $restaurant->phone_number = $faker->numberBetween(3000000000, 3999999999);
-        //     $restaurant->description = $faker->paragraph();
-        //     $restaurant->photo = 'https://picsum.photos/500/300';
-        //     $restaurant->save();
-        // }
     }
 }

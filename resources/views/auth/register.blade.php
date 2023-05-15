@@ -120,9 +120,11 @@
                   {{ __('Partita IVA') }}
                 </label>
 
-                <div class="col-md-6">
-                  <input id="vat_number" type="text" class="form-control @error('vat_number') is-invalid @enderror"
-                    name="vat_number" value="{{ old('vat_number') }}" required autocomplete="vat_number" autofocus>
+                <div class="col-md-6 input-group">
+                  <span class="input-group-text" id="basic-addon1">IT</span>
+                  <input id="vat_number" type="text" maxlength="11"
+                    class="form-control @error('vat_number') is-invalid @enderror" name="vat_number"
+                    value="{{ old('vat_number') }}" required autocomplete="vat_number" autofocus>
 
                   @error('vat_number')
                     <span class="invalid-feedback" role="alert">
@@ -133,17 +135,25 @@
               </div>
 
               <div class="mb-4 row">
-                <label for="name" class="col-md-4 col-form-label text-md-right">
-                  {{ __('Tipologia') }}
-                </label>
+                <div class="form-check">
+                  <label for="name" class="col-md-4 col-form-label text-md-right">
+                    {{ __('Tipologia') }}
+                  </label>
 
-                @foreach ($types as $type)
-                  <div class="col-3">
-                    <input type="checkbox" id="types-{{ $type->id }}" value="{{ $type->id }}" name="types[]"
-                      class="form-check-control" @if (in_array($type->id, old('types', $restaurant_type ?? []))) checked @endif>
-                    <label for="types-{{ $type->id }}">{{ $type->name }}</label>
-                  </div>
-                @endforeach
+                  @foreach ($types as $type)
+                    <div class="col-3">
+                      <input type="checkbox" id="types-{{ $type->id }}" value="{{ $type->id }}" name="types[]"
+                        class="form-check-control" @if (in_array($type->id, old('types', $restaurant_type ?? []))) checked @endif>
+                      <label for="types-{{ $type->id }}">{{ $type->name }}</label>
+                    </div>
+                  @endforeach
+
+                  @error('types')
+                    <span class="invalid-feedback d-block" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
               </div>
 
               <div class="mb-4 row">
@@ -152,7 +162,7 @@
                 </label>
 
                 <div class="col-md-6">
-                  <input id="phone_number" type="text"
+                  <input id="phone_number" type="text" maxlength="11"
                     class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
                     value="{{ old('phone_number') }}" required autocomplete="phone_number" autofocus>
 
@@ -170,9 +180,8 @@
                 </label>
 
                 <div class="col-md-6">
-                  <input id="description" type="text"
-                    class="form-control @error('description') is-invalid @enderror" name="description"
-                    value="{{ old('description') }}" required autocomplete="description" autofocus>
+                  <textarea id="description" type="text" class="form-control @error('description') is-invalid @enderror"
+                    name="description" value="{{ old('description') }}" autocomplete="description" autofocus rows="10"></textarea>
 
                   @error('description')
                     <span class="invalid-feedback" role="alert">
@@ -189,7 +198,7 @@
 
                 <div class="col-md-6">
                   <input id="photo" type="text" class="form-control @error('photo') is-invalid @enderror"
-                    name="photo" value="{{ old('photo') }}" required autocomplete="photo" autofocus>
+                    name="photo" value="{{ old('photo') }}" autocomplete="photo" autofocus>
 
                   @error('photo')
                     <span class="invalid-feedback" role="alert">
