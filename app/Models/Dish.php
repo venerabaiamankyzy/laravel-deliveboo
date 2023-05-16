@@ -10,11 +10,13 @@ class Dish extends Model
     use HasFactory;
 
     // RELATIONS
-    public function restaurant() {
+    public function restaurant()
+    {
         return $this->belongsTo(Restaurant::class);
     }
 
-    public function orders() {
+    public function orders()
+    {
         return $this->belongsToMany(Order::class);
     }
 
@@ -29,8 +31,9 @@ class Dish extends Model
         return date('d/m/y H:i', strtotime($value));
     }
 
-    public function getAbstract($max = 50) {
-        return substr($this->description, 0, $max). "...";
+    public function getAbstract($max = 50)
+    {
+        return substr($this->description, 0, $max) . "...";
     }
 
     // FILLABLE
@@ -43,5 +46,8 @@ class Dish extends Model
         'photo',
     ];
 
-
+    public function getImageUri()
+    {
+        return $this->photo ? asset('storage/' . $this->photo) : 'https://thumbs.dreamstime.com/b/no-image-available-icon-vector-illustration-flat-design-140476186.jpg';
+    }
 }
