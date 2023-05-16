@@ -37,7 +37,11 @@
               @endif
             </td>
             <td class="text-end">
-              <a href="{{ route('admin.dishes.show', $dish->id) }}" class="bi bi-box-arrow-in-up-right"></a>
+              <a href="{{ route('admin.dishes.show', $dish->id) }}"
+                class="bi bi-box-arrow-in-up-right btn btn-link p-0 border-0"></a>
+              <a href="{{ route('admin.dishes.edit', $dish->id) }}"
+                class="bi bi-brush btn btn-link p-0 border-0 ms-1"></a>
+              <a type="button" class="btn btn-link p-0 border-0 ms-3"><i class="bi bi-trash text-danger"></i></a>
             </td>
           </tr>
         @empty

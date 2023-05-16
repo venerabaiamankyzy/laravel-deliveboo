@@ -4,10 +4,13 @@
   <div class="container">
     <h2 class="mt-4">Aggiungi piatto</h2>
 
-    <div class="my-4">
-      <a href="{{ route('admin.dishes.index') }}" type="submit" class="btn btn-primary ms-auto">
+    <div class="my-4 d-flex">
+      <a href="{{ route('admin.dishes.index') }}" class="btn btn-primary">
         <i class="bi bi-arrow-bar-left"></i>
         Torna alla lista</a>
+      <a href="{{ route('admin.dishes.edit', $dish) }}" class="btn btn-warning ms-auto ">
+        <i class="bi bi-brush"></i>
+        Modifica</a>
     </div>
 
     <div class="row">
