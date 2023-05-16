@@ -41,7 +41,11 @@
                 class="bi bi-box-arrow-in-up-right btn btn-link p-0 border-0"></a>
               <a href="{{ route('admin.dishes.edit', $dish->id) }}"
                 class="bi bi-brush btn btn-link p-0 border-0 ms-1"></a>
-              <a type="button" class="btn btn-link p-0 border-0 ms-3"><i class="bi bi-trash text-danger"></i></a>
+                <button 
+                class="bi bi-trash3 text-danger btn-icon" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $dish->id }}">
+              </button>
+                
+                
             </td>
           </tr>
         @empty
@@ -52,4 +56,37 @@
       </tbody>
     </table>
   </div>
+@endsection
+
+@section('modals')
+@forelse ($dishes as $dish)
+    <!-- Modal -->
+    <div class="modal modal-lg fade" id="delete-modal-{{ $dish->id }}" tabindex="-1" aria-labelledby="delete-modal-{{ $dish->id }}" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma eliminazione!</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-start">
+            Sei sicuro di voler eliminare il piatto "{{ $dish->name }}" con ID "{{ $dish->id }}"? <br>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+
+            <form action="{{ route('admin.dishes.destroy', $dish)}}" method="POST">
+                @method('delete')
+                @csrf 
+
+                <button type="submit" class="btn btn-danger">Elimina</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    @empty
+  @endforelse
+
+
 @endsection
