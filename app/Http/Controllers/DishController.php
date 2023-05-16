@@ -139,7 +139,7 @@ class DishController extends Controller
 
         if (Arr::exists($data, 'photo')) {
             if ($dish->photo) Storage::delete($dish->photo);
-            $img_path = Storage::put('uploads/projects', $data['photo']);
+            $img_path = Storage::put('uploads/dishes', $data['photo']);
             $data['photo'] =  $img_path;
         }
 
