@@ -18,7 +18,7 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::where('restaurant_id', Auth::id())->paginate(3);
+        $dishes = Dish::where('restaurant_id', Auth::id())->paginate(15);
 
         return view('admin.dishes.index', compact('dishes'));
     }

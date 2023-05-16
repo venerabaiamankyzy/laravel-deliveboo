@@ -10,7 +10,7 @@
                 Torna alla lista</a>
         </div>
 
-        <form class="mt-2 border border-dark p-4" action="{{ route('admin.dishes.store') }}" method="post"
+        <form class="mt-2 mb-4 border border-dark p-4" action="{{ route('admin.dishes.store') }}" method="post"
             enctype="multipart/form-data" style="background-color: #f5f5f5">
             @csrf
 
