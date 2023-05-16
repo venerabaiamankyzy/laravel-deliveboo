@@ -119,7 +119,7 @@ class DishController extends Controller
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric', 'between:0,9999.99'],
-            'photo' => ['required', 'string'],
+            'photo' => ['required', 'image'],
         ], [
             'name.required' => 'Il campo nome è obbligatorio',
             'name.string' => 'Il campo nome deve essere una stringa',
@@ -129,11 +129,19 @@ class DishController extends Controller
             'price.numeric' => 'Il campo prezzo deve essere un numero',
             'price.between' => 'Il campo prezzo deve essere compreso tra :min e :max',
             'photo.required' => 'Il campo foto è obbligatorio',
-            'photo.string' => 'Il campo foto deve essere una stringa',
+            'photo.image' => 'Il file caricato deve essere un immagine',
         ]);
 
         if (!$request->has('is_visible')) $data['is_visible'] = 0;
         $data['restaurant_id'] = Auth::id();
+
+        //* Metodo caricamento immagine 
+
+        if (Arr::exists($data, 'photo')) {
+            if ($dish->photo) Storage::delete($dish->photo);
+            $img_path = Storage::put('uploads/projects', $data['photo']);
+            $data['photo'] =  $img_path;
+        }
 
         $dish->fill($data);
         $dish->update();
