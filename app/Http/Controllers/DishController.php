@@ -47,7 +47,7 @@ class DishController extends Controller
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric', 'between:0,9999.99'],
-            'photo' => ['required', 'image'],
+            'photo' => ['required', 'image', 'mimes:png,jpg,jpeg'],
         ], [
             'name.required' => 'Il campo nome è obbligatorio',
             'name.string' => 'Il campo nome deve essere una stringa',
@@ -58,6 +58,8 @@ class DishController extends Controller
             'price.between' => 'Il campo prezzo deve essere compreso tra :min e :max',
             'photo.required' => 'Il campo foto è obbligatorio',
             'photo.image' => 'Il file caricato deve essere un immagine',
+            'photo.mimes' => 'Le estensioni accettate sono:png,jpg,jpeg',
+
         ]);
 
 
@@ -119,7 +121,7 @@ class DishController extends Controller
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric', 'between:0,9999.99'],
-            'photo' => ['required', 'image'],
+            'photo' => ['required', 'image', 'mimes:png,jpg,jpeg'],
         ], [
             'name.required' => 'Il campo nome è obbligatorio',
             'name.string' => 'Il campo nome deve essere una stringa',
@@ -130,6 +132,8 @@ class DishController extends Controller
             'price.between' => 'Il campo prezzo deve essere compreso tra :min e :max',
             'photo.required' => 'Il campo foto è obbligatorio',
             'photo.image' => 'Il file caricato deve essere un immagine',
+            'photo.mimes' => 'Le estensioni accettate sono:png,jpg,jpeg',
+
         ]);
 
         if (!$request->has('is_visible')) $data['is_visible'] = 0;
