@@ -13,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -39,14 +40,14 @@ class RegisteredUserController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'company_name' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'vat_number' => ['required', 'numeric', 'min_digits:11', 'max_digits:11', 'unique:'.Restaurant::class.',vat_number'],
+            'vat_number' => ['required', 'numeric', 'min_digits:11', 'max_digits:11', 'unique:' . Restaurant::class . ',vat_number'],
             'phone_number' => ['required', 'numeric', 'min_digits:7', 'max_digits:11'],
             'description' => ['nullable', 'string'],
-            'photo' => ['nullable', 'string'],
+            'photo' => ['nullable', 'image'],
             'types' => ['required'],
         ], [
             'name.required' => 'Il campo Nome è obbligatorio',
@@ -71,8 +72,11 @@ class RegisteredUserController extends Controller
             'phone_number.max_digits' => 'Il campo Telefono deve avere al massimo :max caratteri',
             'phone_number.min_digits' => 'Il campo Telefono deve avere minimo :min caratteri',
             'types.required' => 'Il campo Tipologia è obbligatorio',
+            'photo.image' => 'Il file caricato deve essere un immagine',
+
+
         ]);
-        
+
 
         $user = User::create([
             'name' => $request->name,
@@ -90,7 +94,14 @@ class RegisteredUserController extends Controller
             'photo' => $request->photo,
         ]);
 
-        if(Arr::exists($data, "types")) $restaurant->types()->attach($data["types"]);
+        if (Arr::exists($data, "types")) $restaurant->types()->attach($data["types"]);
+
+        //* Metodo caricamento immagine 
+        if (Arr::exists($data, 'photo')) {
+
+            $img_path = Storage::put('uploads/restaurants', $data['photo']);
+            $data['photo'] =  $img_path;
+        }
 
         event(new Registered($user));
 

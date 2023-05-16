@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Dish;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DishController extends Controller
 {
@@ -46,7 +47,7 @@ class DishController extends Controller
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric', 'between:0,9999.99'],
-            'photo' => ['required', 'string'],
+            'photo' => ['required', 'image'],
         ], [
             'name.required' => 'Il campo nome è obbligatorio',
             'name.string' => 'Il campo nome deve essere una stringa',
@@ -56,12 +57,19 @@ class DishController extends Controller
             'price.numeric' => 'Il campo prezzo deve essere un numero',
             'price.between' => 'Il campo prezzo deve essere compreso tra :min e :max',
             'photo.required' => 'Il campo foto è obbligatorio',
-            'photo.string' => 'Il campo foto deve essere una stringa',
+            'photo.image' => 'Il file caricato deve essere un immagine',
         ]);
-        
+
 
         if (!$request->has('is_visible')) $data['is_visible'] = 0;
         $data['restaurant_id'] = Auth::id();
+
+        //* Metodo caricamento immagine 
+        if (Arr::exists($data, 'photo')) {
+
+            $img_path = Storage::put('uploads/dishes', $data['photo']);
+            $data['photo'] =  $img_path;
+        }
 
         $dish = new Dish;
         $dish->fill($data);
@@ -123,7 +131,7 @@ class DishController extends Controller
             'photo.required' => 'Il campo foto è obbligatorio',
             'photo.string' => 'Il campo foto deve essere una stringa',
         ]);
-        
+
         if (!$request->has('is_visible')) $data['is_visible'] = 0;
         $data['restaurant_id'] = Auth::id();
 
