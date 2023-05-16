@@ -57,10 +57,10 @@
                     <div class="input-group">
                         <span class="input-group-text">€</span>
 
-                        <input id="price" type="number" step="0.01" min="0"
-                            oninput="this.value = Math.abs(this.value)"
+                        <input id="price" type="number" step="0.01"
                             class="form-control @error('price') is-invalid @enderror" name="price"
-                            value="{{ old('price') }}" required autocomplete="price" autofocus>
+                            value="{{ old('price') }}" required autocomplete="price" autofocus min="0"
+                            oninput="value == '' ? value = '' : value < 0 ? value = value * -1 : false">
                     </div>
 
                     @error('price')
