@@ -87,7 +87,7 @@
                     {{ __('Foto') }}
                 </label>
 
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <input id="photo" type="file" class="form-control @error('photo') is-invalid @enderror"
                         name="photo">
 
@@ -96,6 +96,12 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+                </div>
+
+                <div class="col-md-2 text-center">
+                    <label for="current-image" class="form-label text-md-right">Current Image</label>
+                    <img src="{{ $dish->getImageUri() }}" name="current-image" alt="dishe-image" class="form-box-img"
+                        style="max-width: 200px">
                 </div>
             </div>
 
