@@ -101,7 +101,7 @@
                 <div class="col-md-2 text-center">
                     <label for="current-image" class="form-label text-md-right">Current Image</label>
                     <img src="{{ $dish->getImageUri() }}" name="current-image" alt="dishe-image" class="form-box-img"
-                        style="max-width: 200px">
+                        style="max-width: 100%">
                 </div>
             </div>
 
