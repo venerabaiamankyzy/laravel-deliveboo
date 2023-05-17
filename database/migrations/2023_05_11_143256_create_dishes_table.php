@@ -20,6 +20,7 @@ return new class extends Migration
             $table->float('price', 6, 2);
             $table->string('photo');
             $table->boolean('is_visible');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

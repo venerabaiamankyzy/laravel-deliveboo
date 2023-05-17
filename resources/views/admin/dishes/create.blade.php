@@ -1,15 +1,19 @@
 @extends('layouts.app')
 
+@section('title', 'Aggiungi piatto')
+
+@section('actions')
+	<div class="my-4">
+		<a 
+			href="{{ route('admin.dishes.index') }}" type="submit" class="btn btn-primary ms-auto">
+			<i class="bi bi-arrow-bar-left"></i>
+				Torna alla lista
+		</a>
+	</div>
+@endsection
+
 @section('content')
     <div class="container">
-        <h2 class="mt-4">Aggiungi piatto</h2>
-
-        <div class="my-4">
-            <a href="{{ route('admin.dishes.index') }}" type="submit" class="btn btn-primary ms-auto">
-                <i class="bi bi-arrow-bar-left"></i>
-                Torna alla lista</a>
-        </div>
-
         <form class="mt-2 mb-4 border border-dark p-4" action="{{ route('admin.dishes.store') }}" method="post"
             enctype="multipart/form-data" style="background-color: #f5f5f5">
             @csrf

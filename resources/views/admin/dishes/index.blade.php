@@ -1,14 +1,23 @@
 @extends('layouts.app')
 
+@section('title', 'Lista piatti')
+
+@section('actions')
+	<div class="d-flex">
+		<div id="buttons" class="d-flex my-4 px-2">
+					<a href="{{ route('admin.dishes.create') }}" type="button" class="btn btn-success ms-auto">Aggiungi piatto</a>
+			</div>
+			<div id="buttons" class="d-flex my-4">
+					<a href="{{ route('admin.dishes.trash') }}" type="button" class="btn btn-outline-secondary ms-auto">Cestino</a>
+			</div>
+	</div>    
+@endsection
+
 @section('content')
     {{-- @dd($dishes) --}}
     <div class="container">
-        <h2 class="mt-4">Lista piatti</h2>
-
-        <div id="buttons" class="d-flex my-4">
-            <a href="{{ route('admin.dishes.create') }}" type="button" class="btn btn-success ms-auto">Aggiungi piatto</a>
-        </div>
-
+        
+        
         <table class="table table-striped mt-2 border border-dark">
             <thead>
                 <tr>
