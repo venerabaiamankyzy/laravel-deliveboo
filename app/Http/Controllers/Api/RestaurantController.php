@@ -9,7 +9,11 @@ use Illuminate\Http\Request;
 class RestaurantController extends Controller
 {
     public function index() {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::with('types')->paginate(9);
+
+        foreach($restaurants as $restaurant) {
+            if ($restaurant->photo) $restaurant->photo = $restaurant->getImageUri();
+        };
 
         return response()->json([
             'success' => true,

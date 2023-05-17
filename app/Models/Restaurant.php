@@ -26,4 +26,9 @@ class Restaurant extends Model
     }
 
     protected $fillable = ["id", "user_id", "name", "address", "vat_number", "phone_number", "description", "photo"];
+
+    public function getImageUri()
+    {
+        return $this->photo ? url('storage/' . $this->photo) : 'https://thumbs.dreamstime.com/b/no-image-available-icon-vector-illustration-flat-design-140476186.jpg';
+    }
 }

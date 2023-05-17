@@ -21,7 +21,7 @@ class RestaurantTypeSeeder extends Seeder
         $types = Type::all()->pluck('id')->toArray();
 
         foreach ($restaurants as $restaurant) {
-            $restaurant->types()->attach($faker->randomElements($types, random_int(0, 3)));
+            $restaurant->types()->attach($faker->randomElements($types, random_int(1, 3)));
         }
     }
 }

@@ -84,6 +84,12 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        //* Metodo caricamento immagine 
+        if (Arr::exists($data, 'photo')) {
+            $img_path = Storage::put('uploads/restaurants', $data['photo']);
+            $data['photo'] = $img_path;
+        }
+
         $restaurant = Restaurant::create([
             'user_id' => $user->id,
             'name' => $request->company_name,
@@ -91,23 +97,14 @@ class RegisteredUserController extends Controller
             'vat_number' => $request->vat_number,
             'phone_number' => $request->phone_number,
             'description' => $request->description,
-            'photo' => $request->photo,
+            'photo' => $data['photo'],
         ]);
 
         if (Arr::exists($data, "types")) $restaurant->types()->attach($data["types"]);
 
-        //* Metodo caricamento immagine 
-        if (Arr::exists($data, 'photo')) {
-
-            $img_path = Storage::put('uploads/restaurants', $data['photo']);
-            $data['photo'] =  $img_path;
-        }
-
         event(new Registered($user));
 
         Auth::login($user);
-
-        // dd($data);
 
         return redirect(RouteServiceProvider::HOME);
     }
