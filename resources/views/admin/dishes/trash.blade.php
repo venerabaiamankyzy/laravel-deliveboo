@@ -3,13 +3,13 @@
 @section('title', 'Trashed dishes')
 
 @section('actions')
-  <div id="buttons" class="d-flex my-4">
-    <a href="{{ route('admin.dishes.index') }}" type="button" class="btn btn-success ms-auto">Torna alla lista</a>
-  </div>
+    <div id="buttons" class="d-flex my-4">
+        <a href="{{ route('admin.dishes.index') }}" type="button" class="btn btn-success ms-auto">Torna alla lista</a>
+    </div>
 @endsection
 
 @section('content')
-    
+
     <div class="container">
         <table class="table table-striped mt-2 border border-dark">
             <thead>
@@ -39,17 +39,17 @@
                             @endif
                         </td>
                         <td class="text-end">
-                            
-                            {{-- icon for delete--}}
-                            <a href="#"
-                            class="text-danger" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $dish->id }}">
-                            <i class="bi bi-trash3 btn-icon"></i>
-                          </a> 
-                          {{-- icon for reset--}}
-                          <a href="#"
-                            class="text-success" data-bs-toggle="modal" data-bs-target="#restore-modal-{{ $dish->id }}">
-                            <i class="bi bi-arrow-repeat btn-icon fs-5"></i>
-                          </a> 
+
+                            {{-- icon for delete --}}
+                            <a href="#" class="text-danger" data-bs-toggle="modal"
+                                data-bs-target="#delete-modal-{{ $dish->id }}">
+                                <i class="bi bi-trash3 btn-icon"></i>
+                            </a>
+                            {{-- icon for reset --}}
+                            <a href="#" class="text-success" data-bs-toggle="modal"
+                                data-bs-target="#restore-modal-{{ $dish->id }}">
+                                <i class="bi bi-arrow-repeat btn-icon fs-5"></i>
+                            </a>
                         </td>
                     </tr>
                 @empty
@@ -62,70 +62,68 @@
 
         {{-- {{ $dishes->links('pagination::bootstrap-5') }} --}}
     </div>
-@endsection     
-    
-@section('modals')
-  @forelse ($dishes as $dish)
-    <!-- modal for delete-->
-    <div class="modal modal-lg fade" id="delete-modal-{{ $dish->id }}" tabindex="-1" aria-labelledby="delete-modal-{{ $dish->id }}" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma eliminazione!</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-start">
-            Sei sicuro di voler eliminare definitivamente il progetto "{{ $dish->name }}" con ID "{{ $dish->id }}"? <br>
-            L'operazione non è reversibile.
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-            
-            <form action="{{ route('admin.dishes.force-delete', $dish)}}" method="POST"> 
-                @method('delete')
-                @csrf 
-                
-                <button type="submit" class="btn btn-danger">Elimina</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    @empty  
-  @endforelse
-  {{-- modal for reset--}}
-  @forelse ($dishes as $dish)
-    <!-- Modal -->
-    <div class="modal modal-lg fade" id="restore-modal-{{ $dish->id }}" tabindex="-1" aria-labelledby="restore-modal-{{ $dish->id }}" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma eliminazione!</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-start">
-            Sei sicuro di voler ripristinare il progetto "{{ $dish->name }}" con ID "{{ $dish->id }}"?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annulla</button>
-            
-            <form action="{{ route('admin.dishes.restore', $dish)}}" method="POST"> 
-                @method('put')
-                @csrf 
-                
-                <button type="submit" class="btn btn-success">Ripristina</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    @empty  
-  @endforelse
 @endsection
-  
-        
-     
-    
-  
-   
 
+@section('modals')
+    @forelse ($dishes as $dish)
+        <!-- modal for delete-->
+        <div class="modal modal-lg fade" id="delete-modal-{{ $dish->id }}" tabindex="-1"
+            aria-labelledby="delete-modal-{{ $dish->id }}" aria-hidden="true" data-bs-backdrop="static"
+            data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma eliminazione!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-start">
+                        Sei sicuro di voler eliminare definitivamente il progetto "{{ $dish->name }}" con ID
+                        "{{ $dish->id }}"? <br>
+                        L'operazione non è reversibile.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+
+                        <form action="{{ route('admin.dishes.force-delete', $dish) }}" method="POST">
+                            @method('delete')
+                            @csrf
+
+                            <button type="submit" class="btn btn-danger">Elimina</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @empty
+    @endforelse
+    {{-- modal for reset --}}
+    @forelse ($dishes as $dish)
+        <!-- Modal -->
+        <div class="modal modal-lg fade" id="restore-modal-{{ $dish->id }}" tabindex="-1"
+            aria-labelledby="restore-modal-{{ $dish->id }}" aria-hidden="true" data-bs-backdrop="static"
+            data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Ripristina!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-start">
+                        Sei sicuro di voler ripristinare il progetto "{{ $dish->name }}" con ID "{{ $dish->id }}"?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annulla</button>
+
+                        <form action="{{ route('admin.dishes.restore', $dish) }}" method="POST">
+                            @method('put')
+                            @csrf
+
+                            <button type="submit" class="btn btn-success">Ripristina</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @empty
+    @endforelse
+@endsection
