@@ -161,8 +161,60 @@ class DishController extends Controller
      */
     public function destroy(Dish $dish)
     {
+        $id_dish = $dish->id;
+        
         $dish->delete();
 
-        return redirect()->route('admin.dishes.index');
+        return redirect()->route('admin.dishes.index')
+        ->with('messsage_type', "danger")
+        ->with('message_content', "Piatto $id_dish spostato nel cestino");;
+    }
+
+    /**
+     * Display a listing of the trashed resource.
+     * 
+     *  @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function trash(Request $request
+    ) { 
+
+         $dishes = Dish::onlyTrashed()->get();
+
+        return view('admin.dishes.trash', compact('dishes'));
+    }
+
+       /**
+     * Force delete the specified resource from storage.
+     *
+     * @param  \App\Models\Dish  $dish
+     * @return \Illuminate\Http\Response
+     */
+    public function forceDelete(Int $id)
+    {
+        $dish =Dish::where('id', $id)->onlyTrashed()->first();
+        
+        if($dish->photo) Storage::delete($dish->photo);
+        
+        $dish->forceDelete();
+
+        return to_route('admin.dishes.trash')     
+            ->with('messsage_type', "danger")
+            ->with('message_content', "Piatto $id eleminato definitivamente");
+    }
+
+      /**
+     * Restore the specified resource from storage.
+     *
+     * @param  \App\Models\Dish  $dish
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(Int $id)
+    {
+        $dish =Dish::where('id', $id)->onlyTrashed()->first();
+        $dish->restore();
+        
+        return to_route('admin.dishes.index')     
+            ->with('message_content', "Piatto $id ripristinato");
     }
 }

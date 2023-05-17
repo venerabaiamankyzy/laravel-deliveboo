@@ -24,6 +24,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth'])->prefix('/admin')->name('admin.')->group(function () {
+    Route::get('/dishes/trash', [DishController::class, 'trash'])->name('dishes.trash');
+    Route::put('/dishes/{dish}/restore', [DishController::class, 'restore'])->name('dishes.restore');
+    Route::delete('/dishes/{dish}/force-delete', [DishController::class, 'forceDelete'])->name('dishes.force-delete');
+
     Route::resource('dishes', DishController::class);
 });
 
