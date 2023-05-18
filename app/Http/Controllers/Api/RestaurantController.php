@@ -20,4 +20,15 @@ class RestaurantController extends Controller
             'results' => $restaurants,
         ]);
     }
+
+    public function show($id) {
+        $restaurant = Restaurant::where('id', $id)->with('dishes')->first();
+
+        if(!$restaurant) return response(null, 404);
+
+        return response()->json([
+            'success' => true,
+            'results' => $restaurant,
+        ]);
+    }
 }
