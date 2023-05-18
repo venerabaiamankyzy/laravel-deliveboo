@@ -58,7 +58,7 @@ class DishController extends Controller
             'price.between' => 'Il campo prezzo deve essere compreso tra :min e :max',
             'photo.required' => 'Il campo foto è obbligatorio',
             'photo.image' => 'Il file caricato deve essere un immagine',
-            'photo.mimes' => 'Le estensioni accettate sono:png,jpg,jpeg',
+            'photo.mimes' => 'Le estensioni accettate sono: png,jpg,jpeg',
 
         ]);
 
