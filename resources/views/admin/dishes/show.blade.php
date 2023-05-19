@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container mb-4">
         <h2 class="mt-4">Aggiungi piatto</h2>
 
         <div class="my-4 d-flex">

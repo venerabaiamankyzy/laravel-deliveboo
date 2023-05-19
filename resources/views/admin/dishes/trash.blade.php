@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Trashed dishes')
+@section('title', 'Cestino')
 
 @section('actions')
     <div id="buttons" class="d-flex my-4">
@@ -77,7 +77,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-start">
-                        Sei sicuro di voler eliminare definitivamente il progetto "{{ $dish->name }}" con ID
+                        Sei sicuro di voler eliminare definitivamente il piatto "{{ $dish->name }}" con ID
                         "{{ $dish->id }}"? <br>
                         L'operazione non è reversibile.
                     </div>
@@ -109,7 +109,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-start">
-                        Sei sicuro di voler ripristinare il progetto "{{ $dish->name }}" con ID "{{ $dish->id }}"?
+                        Sei sicuro di voler ripristinare il piatto "{{ $dish->name }}" con ID "{{ $dish->id }}"?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annulla</button>
