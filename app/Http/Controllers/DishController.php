@@ -8,6 +8,7 @@ use App\Models\Dish;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class DishController extends Controller
 {
@@ -43,25 +44,7 @@ class DishController extends Controller
     {
         $data = $request->all();
 
-        $request->validate([
-            'name' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'price' => ['required', 'numeric', 'between:0,9999.99'],
-            'photo' => ['required', 'image', 'mimes:png,jpg,jpeg'],
-        ], [
-            'name.required' => 'Il campo nome è obbligatorio',
-            'name.string' => 'Il campo nome deve essere una stringa',
-            'description.required' => 'Il campo descrizione è obbligatorio',
-            'description.string' => 'Il campo descrizione deve essere una stringa',
-            'price.required' => 'Il campo prezzo è obbligatorio',
-            'price.numeric' => 'Il campo prezzo deve essere un numero',
-            'price.between' => 'Il campo prezzo deve essere compreso tra :min e :max',
-            'photo.required' => 'Il campo foto è obbligatorio',
-            'photo.image' => 'Il file caricato deve essere un immagine',
-            'photo.mimes' => 'Le estensioni accettate sono: png,jpg,jpeg',
-
-        ]);
-
+        $this->validation($data);
 
         if (!$request->has('is_visible')) $data['is_visible'] = 0;
         $data['restaurant_id'] = Auth::id();
@@ -117,24 +100,7 @@ class DishController extends Controller
     {
         $data = $request->all();
 
-        $request->validate([
-            'name' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'price' => ['required', 'numeric', 'between:0,9999.99'],
-            'photo' => ['required', 'image', 'mimes:png,jpg,jpeg'],
-        ], [
-            'name.required' => 'Il campo nome è obbligatorio',
-            'name.string' => 'Il campo nome deve essere una stringa',
-            'description.required' => 'Il campo descrizione è obbligatorio',
-            'description.string' => 'Il campo descrizione deve essere una stringa',
-            'price.required' => 'Il campo prezzo è obbligatorio',
-            'price.numeric' => 'Il campo prezzo deve essere un numero',
-            'price.between' => 'Il campo prezzo deve essere compreso tra :min e :max',
-            'photo.required' => 'Il campo foto è obbligatorio',
-            'photo.image' => 'Il file caricato deve essere un immagine',
-            'photo.mimes' => 'Le estensioni accettate sono:png,jpg,jpeg',
-
-        ]);
+        $this->validation($data);
 
         if (!$request->has('is_visible')) $data['is_visible'] = 0;
         $data['restaurant_id'] = Auth::id();
@@ -216,5 +182,29 @@ class DishController extends Controller
         
         return to_route('admin.dishes.index')     
             ->with('message_content', "Piatto $id ripristinato");
+    }
+
+    private function validation($data) {
+        return Validator::make(
+            $data, [
+          
+                'name' => ['required', 'string'],
+                'description' => ['required', 'string'],
+                'price' => ['required', 'numeric', 'between:0,9999.99'],
+                'photo' => ['required', 'image', 'mimes:png,jpg,jpeg'],
+            ], 
+            [
+                'name.required' => 'Il campo nome è obbligatorio',
+                'name.string' => 'Il campo nome deve essere una stringa',
+                'description.required' => 'Il campo descrizione è obbligatorio',
+                'description.string' => 'Il campo descrizione deve essere una stringa',
+                'price.required' => 'Il campo prezzo è obbligatorio',
+                'price.numeric' => 'Il campo prezzo deve essere un numero',
+                'price.between' => 'Il campo prezzo deve essere compreso tra :min e :max',
+                'photo.required' => 'Il campo foto è obbligatorio',
+                'photo.image' => 'Il file caricato deve essere un immagine',
+                'photo.mimes' => 'Le estensioni accettate sono:png,jpg,jpeg',    
+            ]
+        )->validate();
     }
 }
