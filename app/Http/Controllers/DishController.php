@@ -128,12 +128,12 @@ class DishController extends Controller
     public function destroy(Dish $dish)
     {
         $id_dish = $dish->id;
-        
+
         $dish->delete();
 
         return redirect()->route('admin.dishes.index')
-        ->with('messsage_type', "danger")
-        ->with('message_content', "Piatto $id_dish spostato nel cestino");;
+            ->with('messsage_type', "danger")
+            ->with('message_content', "Piatto $id_dish spostato nel cestino");;
     }
 
     /**
@@ -142,15 +142,16 @@ class DishController extends Controller
      *  @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function trash(Request $request
-    ) { 
+    public function trash(
+        Request $request
+    ) {
 
-         $dishes = Dish::onlyTrashed()->get();
+        $dishes = Dish::onlyTrashed()->get();
 
         return view('admin.dishes.trash', compact('dishes'));
     }
 
-       /**
+    /**
      * Force delete the specified resource from storage.
      *
      * @param  \App\Models\Dish  $dish
@@ -158,18 +159,18 @@ class DishController extends Controller
      */
     public function forceDelete(Int $id)
     {
-        $dish =Dish::where('id', $id)->onlyTrashed()->first();
-        
-        if($dish->photo) Storage::delete($dish->photo);
-        
+        $dish = Dish::where('id', $id)->onlyTrashed()->first();
+
+        if ($dish->photo) Storage::delete($dish->photo);
+
         $dish->forceDelete();
 
-        return to_route('admin.dishes.trash')     
+        return to_route('admin.dishes.trash')
             ->with('messsage_type', "danger")
             ->with('message_content', "Piatto $id eleminato definitivamente");
     }
 
-      /**
+    /**
      * Restore the specified resource from storage.
      *
      * @param  \App\Models\Dish  $dish
@@ -177,22 +178,24 @@ class DishController extends Controller
      */
     public function restore(Int $id)
     {
-        $dish =Dish::where('id', $id)->onlyTrashed()->first();
+        $dish = Dish::where('id', $id)->onlyTrashed()->first();
         $dish->restore();
-        
-        return to_route('admin.dishes.index')     
+
+        return to_route('admin.dishes.index')
             ->with('message_content', "Piatto $id ripristinato");
     }
 
-    private function validation($data) {
+    private function validation($data)
+    {
         return Validator::make(
-            $data, [
-          
+            $data,
+            [
+
                 'name' => ['required', 'string'],
                 'description' => ['required', 'string'],
                 'price' => ['required', 'numeric', 'between:0,9999.99'],
                 'photo' => ['required', 'image', 'mimes:png,jpg,jpeg'],
-            ], 
+            ],
             [
                 'name.required' => 'Il campo nome è obbligatorio',
                 'name.string' => 'Il campo nome deve essere una stringa',
@@ -203,7 +206,7 @@ class DishController extends Controller
                 'price.between' => 'Il campo prezzo deve essere compreso tra :min e :max',
                 'photo.required' => 'Il campo foto è obbligatorio',
                 'photo.image' => 'Il file caricato deve essere un immagine',
-                'photo.mimes' => 'Le estensioni accettate sono:png,jpg,jpeg',    
+                'photo.mimes' => 'Le estensioni accettate sono:png,jpg,jpeg',
             ]
         )->validate();
     }
