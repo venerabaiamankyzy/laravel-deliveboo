@@ -200,7 +200,7 @@ class DishController extends Controller
 
         return to_route('admin.dishes.trash')     
             ->with('messsage_type', "danger")
-            ->with('message_content', "Piatto $id eleminato definitivamente");
+            ->with('message_content', "Piatto $id eliminato definitivamente");
     }
 
       /**
