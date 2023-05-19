@@ -49,6 +49,6 @@ class Dish extends Model
 
     public function getImageUri()
     {
-        return $this->photo ? asset('storage/' . $this->photo) : 'https://thumbs.dreamstime.com/b/no-image-available-icon-vector-illustration-flat-design-140476186.jpg';
+        return $this->photo ? url('storage/' . $this->photo) : 'https://thumbs.dreamstime.com/b/no-image-available-icon-vector-illustration-flat-design-140476186.jpg';
     }
 }

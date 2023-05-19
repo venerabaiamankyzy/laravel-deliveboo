@@ -26,6 +26,10 @@ class RestaurantController extends Controller
 
         if(!$restaurant) return response(null, 404);
 
+        // Foto assoluta ristorante
+        $restaurant->photo = $restaurant->getImageUri();
+
+        // Foto assoluta piatti
         foreach($restaurant->dishes as $dish) {
             if ($dish->photo) $dish->photo = $dish->getImageUri();
         };
