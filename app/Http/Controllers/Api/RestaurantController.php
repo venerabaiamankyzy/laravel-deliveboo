@@ -30,12 +30,12 @@ class RestaurantController extends Controller
                     $q->whereIn('type_id', $typesArray);
                 });
             }
-            
         }
 
         // Esegui la query per ottenere i ristoranti filtrati
         $restaurants = $query->paginate(9);
 
+        // Risolve il path dell'immagine
         foreach ($restaurants as $restaurant) {
             if ($restaurant->photo) $restaurant->photo = $restaurant->getImageUri();
         };
