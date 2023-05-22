@@ -35,7 +35,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $basket_count = Basket::where('id')->where('user_id', $user_id)->count();
+        return response()->json([“basket_count” => $basket_count], status: 200);
     }
 
     /**
