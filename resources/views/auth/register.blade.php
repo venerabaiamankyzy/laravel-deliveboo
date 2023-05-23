@@ -11,7 +11,7 @@
             <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
               @csrf
 
-              <h3 class="mb-4">Registrazione ristoratore</h3>
+              <h3 class="mb-4 regist-color">Registrazione ristoratore</h3>
 
               <div class="mb-4 row">
                 <label for="name" class="col-md-4 col-form-label text-md-right">
@@ -70,7 +70,7 @@
                 </div>
               </div>
 
-              <h3 class="my-4">Registrazione ristorante</h3>
+              <h3 class="my-4 regist-color">Registrazione ristorante</h3>
 
               <div class="mb-4 row">
                 <label for="company_name" class="col-md-4 col-form-label text-md-right">
@@ -128,12 +128,12 @@
               </div>
 
               <div class="mb-4 row">
-                <div>
+              
                   <label for="name" class="col-md-4 col-form-label text-md-right">
                     {{ __('Tipologia') }}
                   </label>
 
-                  <div class="row">
+                  <div class="col-md-8 d-flex flex-wrap">
                     @foreach ($types as $type)
                       <div class="col-3 my-1">
                         <input type="checkbox" id="types-{{ $type->id }}" value="{{ $type->id }}"
@@ -148,7 +148,7 @@
                       <strong>{{ $message }}</strong>
                     </span>
                   @enderror
-                </div>
+                
               </div>
 
               <div class="mb-4 row">
