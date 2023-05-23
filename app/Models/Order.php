@@ -22,5 +22,6 @@ class Order extends Model
     'customer_surname',
     'customer_mail',
     'customer_phone_number',
-    'customer_address'];
+    'customer_address',
+    'note'];
 }

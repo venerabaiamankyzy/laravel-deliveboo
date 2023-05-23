@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Dish;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -18,11 +19,7 @@ class OrderController extends Controller
 
         // Riempio i dati dell'ordine
         $order->fill($data);
-        $order->total_amount = 30;
         $order->status = 0;
-
-        // Salvo l'ordine
-        $order->save();
 
         // Trasformo i piatti della richiesta in un'array, togliendo però i caratteri '[' e ']'
         $dishes = str_replace(['[', ']'], '', $data['dishes_id']);
@@ -31,6 +28,26 @@ class OrderController extends Controller
         // Trasformo la quantità della richiesta in un'array, togliendo però i caratteri '[' e ']'
         $quantity = str_replace(['[', ']'], '', $data['quantity']);
         $quantityArray = explode(',', $quantity);
+
+        // Recupera i prezzi dei piatti corrispondenti agli 'dish_id' forniti come parametro
+        $dishPrices = Dish::whereIn('id', $dishesArray)->pluck('price', 'id')->toArray();
+
+        // Calcola la somma totale dei prezzi dei piatti
+        $totalAmount = 0;
+
+        for ($i = 0; $i < count($dishesArray); $i++) {
+            $dishId = $dishesArray[$i];
+            $quantity = $quantityArray[$i];
+
+            $dishPrice = $dishPrices[$dishId];
+            $totalAmount += $dishPrice * $quantity;
+        }
+
+        // Assegna la somma totale dei prezzi a $order->total_amount
+        $order->total_amount = $totalAmount;
+
+        // Salvo l'ordine
+        $order->save();
 
         // Per ogni piatto attacco la quantità
         for ($i=0; $i < count($dishesArray); $i++) { 
