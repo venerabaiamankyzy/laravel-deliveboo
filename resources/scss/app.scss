@@ -1,26 +1,35 @@
 @import "./partials/bootstrap_loader.scss";
+
+// Navbar
 .navbar {
     background-color: $main-color;
 }
 .nav-link {
     color: $nav-link-color;
 }
-
 .nav-link:hover {
-    color: green;
-}
-.main-color {
-    color: white;
-    background-color: #f26d00;
+    color: rgb(238, 238, 238);
 }
 
+// registration page
+.card-header {
+    background-color: $main-color;
+    color: white;
+}
+
+.regist-color {
+    text-align: center;
+    margin: 20px 0;
+    color: $main-color;
+}
+
+// login page
 .login-head {
     background-image: url("http://127.0.0.1:8000/img/photo-restaurant.jpg");
     width: 600px;
     height: 540px;
     background-repeat: no-repeat;
     background-size: cover;
-    // box-shadow: inset 2px 2px 4px #f7f7f7, inset -2px -2px 4px #f6f6f6;
 }
 
 .logo_laravel img {
@@ -30,8 +39,13 @@
 .login {
     box-shadow: inset 2px 2px 4px #f7f7f7, inset -2px -2px 4px #f6f6f6;
 }
-.bg-register {
-    background-color: #f26d00;
-    background-repeat: no-repeat;
-    background-size: cover;
+
+// button
+.btn-primary {
+    background-color: $main-color;
+    border: $main-color;
+    color: white;
+}
+.btn-hover-bg {
+    background-color: $main-color-hover;
 }
