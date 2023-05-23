@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-md  bg-white shadow-sm">
-    <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-            <div class="logo_laravel">
-                <img src="{{ asset('./img/logo-white.svg') }}" alt="" class="img-fluid">
-            </div>
-
-        </a>
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+      <div class="logo_laravel">
+        <img src="{{ asset('./img/logo-white.svg')}}" alt="" class="img-fluid">
+      </div>
+      
+    </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
