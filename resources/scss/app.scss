@@ -1,9 +1,14 @@
-@import "~bootstrap/scss/bootstrap";
+@import "./partials/bootstrap_loader.scss";
 .navbar {
-    background-color: #f26d00 !important;
-    // color: rgb(248, 248, 248) !important;
+    background-color: $main-color;
+}
+.nav-link {
+    color: $nav-link-color;
 }
 
+.nav-link:hover {
+    color: green;
+}
 .main-color {
     color: white;
     background-color: #f26d00;
