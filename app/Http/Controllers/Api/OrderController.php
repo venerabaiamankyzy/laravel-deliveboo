@@ -24,12 +24,12 @@ class OrderController extends Controller
         // Salvo l'ordine
         $order->save();
 
-        // Trasformo i piatti della richiesta in un'array
-        $dishes = $data['dishes_id'];
+        // Trasformo i piatti della richiesta in un'array, togliendo però i caratteri '[' e ']'
+        $dishes = str_replace(['[', ']'], '', $data['dishes_id']);
         $dishesArray = explode(',', $dishes);
 
-        // Trasformo la quantità della richiesta in un'array
-        $quantity = $data['quantity'];
+        // Trasformo la quantità della richiesta in un'array, togliendo però i caratteri '[' e ']'
+        $quantity = str_replace(['[', ']'], '', $data['quantity']);
         $quantityArray = explode(',', $quantity);
 
         // Per ogni piatto attacco la quantità
@@ -39,7 +39,8 @@ class OrderController extends Controller
             $order->dishes()->attach($dishesArray[$i], ['quantity' => $quantityArray[$i]]);
         }
 
-
-        return url('http://localhost:5173/');
+        return response()->json([
+            'success' => true,
+        ]);
     }
 }

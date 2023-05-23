@@ -23,4 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('restaurants', RestaurantController::class);
 Route::apiResource('types', TypeController::class);
-Route::apiResource('order', OrderController::class);
+Route::post('order', [OrderController::class, 'store']);
