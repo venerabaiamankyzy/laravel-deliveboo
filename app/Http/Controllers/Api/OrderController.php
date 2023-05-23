@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Dish;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -13,6 +14,38 @@ class OrderController extends Controller
     {
         // Prendo tutti parametri della richiesta del form
         $data = $request->all();
+
+        // Messaggi di errore personalizzati
+        $messages = [
+            'customer_name.required' => 'Il campo nome è obbligatorio.',
+            'customer_surname.required' => 'Il campo cognome è obbligatorio.',
+            'customer_mail.required' => 'Il campo email è obbligatorio.',
+            'customer_mail.email' => 'Il campo email deve essere un indirizzo email valido.',
+            'customer_phone_number.required' => 'Il campo numero di telefono è obbligatorio.',
+            'customer_phone_number.numeric' => 'Il campo numero di telefono deve essere un numero.',
+            'customer_address.required' => 'Il campo indirizzo è obbligatorio.',
+        ];
+
+        // Regole di validazione
+        $rules = [
+            'customer_name' => 'required',
+            'customer_surname' => 'required',
+            'customer_mail' => 'required|email',
+            'customer_phone_number' => 'required|numeric',
+            'customer_address' => 'required',
+        ];
+
+        // Esegui la validazione dei dati
+        $validator = Validator::make($data, $rules, $messages);
+
+        // Controlla se la validazione ha avuto successo
+        if ($validator->fails()) {
+            // Se la validazione non è passata, restituisci gli errori
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors(),
+            ], 422);
+        }
 
         // Creo un nuovo ordine
         $order = new Order;
