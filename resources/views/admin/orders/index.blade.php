@@ -33,7 +33,7 @@
           </tr>
         @empty
           <tr>
-            <td class="text-center" colspan="7">Nessun Ordine</td>
+            <td class="text-center" colspan="8">Nessun Ordine</td>
           </tr>
         @endforelse
       </tbody>
