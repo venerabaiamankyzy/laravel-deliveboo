@@ -21,7 +21,7 @@ class Order extends Model
     // MUTATORS
     protected function getCreatedAtAttribute($value)
     {
-        return date('d/m/y h:i', strtotime($value));
+        return date('d/m/y H:i', strtotime($value));
     }
 
     protected $fillable = ['restaurant_id',
