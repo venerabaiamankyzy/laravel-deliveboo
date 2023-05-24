@@ -1,84 +1,72 @@
+$primary: #f36d00;
+$success: rgb(50, 158, 149);
+
 @import "./partials/bootstrap_loader.scss";
 
 // Navbar
 .navbar {
-    background-color: $main-color;
+  background-color: $main-color;
 }
 .nav-link {
-    color: $nav-link-color;
+  color: $nav-link-color;
 }
 .nav-link:hover {
-    color: rgb(238, 238, 238);
+  color: rgb(238, 238, 238);
 }
 
 // registration page
 .card-header {
-    background-color: $main-color;
-    color: white;
+  background-color: $main-color;
+  color: white;
 }
 
 .regist-color {
-    text-align: center;
-    margin: 20px 0;
-    color: $main-color;
+  text-align: center;
+  margin: 20px 0;
+  color: $main-color;
 }
 
 // login page
 .login-head {
-    background-image: url("http://127.0.0.1:8000/img/photo-restaurant.jpg");
-    width: 600px;
-    height: 540px;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url("http://127.0.0.1:8000/img/photo-restaurant.jpg");
+  width: 600px;
+  height: 540px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .logo_laravel img {
-    width: 12%;
+  width: 12%;
 }
 
 .login {
-    box-shadow: inset 2px 2px 4px #f7f7f7, inset -2px -2px 4px #f6f6f6;
+  box-shadow: inset 2px 2px 4px #f7f7f7, inset -2px -2px 4px #f6f6f6;
 }
 
 // button
 .btn-primary {
-    background-color: $main-color;
-    border: $main-color;
-    color: white;
+  background-color: $main-color;
+  border: $main-color;
+  color: white;
 
-    &:hover {
-        background-color: $main-color-hover;
-    }
+  &:hover {
+    background-color: $main-color-hover;
+  }
+  &:active {
+    background-color: $main-color-hover;
+  }
 }
 .btn-hover-bg {
-    background-color: $main-color-hover;
+  background-color: $main-color-hover;
 }
 
 thead {
-    background-color: $main-color;
-    color: white;
+  background-color: $main-color;
+  color: white;
 }
 
 //table index
-.btn-success {
-    background-color: $main-color;
-    border: 1px solid $main-color;
-
-    &:hover {
-        background-color: $main-color-hover;
-    }
-}
-
-.btn-outline-secondary {
-    color: $main-color;
-    border: 1px solid $main-color;
-
-    &:hover {
-        background-color: $main-color-hover;
-    }
-}
-
 button {
-    border: none;
-    background-color: transparent;
+  border: none;
+  background-color: transparent;
 }

@@ -5,7 +5,8 @@
 @section('actions')
   <div class="d-flex">
     <div id="buttons" class="d-flex my-4 px-2">
-      <a href="{{ route('admin.dishes.create') }}" type="button" class="btn btn-success ms-auto">Aggiungi piatto</a>
+      <a href="{{ route('admin.dishes.create') }}" type="button" class="btn btn-success text-white ms-auto">Aggiungi
+        piatto</a>
     </div>
     <div id="buttons" class="d-flex my-4">
       <a href="{{ route('admin.dishes.trash') }}" type="button" class="btn btn-outline-secondary ms-auto">Cestino</a>
@@ -14,57 +15,52 @@
 @endsection
 
 @section('content')
-  {{-- @dd($dishes) --}}
-  <div class="container">
-
-    <table class="table table-striped mt-2 border border-dark">
-      <thead>
+  <table class="table table-striped mt-2 border border-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Descrizione</th>
+        <th scope="col">Prezzo</th>
+        <th scope="col">Ultima modifica</th>
+        <th scope="col" class="text-center">Visibile</th>
+        <th scope="col" class="text-end">Azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+      @forelse ($dishes as $dish)
         <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Descrizione</th>
-          <th scope="col">Prezzo</th>
-          <th scope="col">Ultima modifica</th>
-          <th scope="col" class="text-center">Visibile</th>
-          <th scope="col" class="text-end">Azioni</th>
+          <th scope="row">{{ $dish->id }}</th>
+          <td>{{ $dish->name }}</td>
+          <td>{{ $dish->getAbstract() }}</td>
+          <td>€{{ number_format((float) $dish->price, 2, '.', '') }}</td>
+          <td>{{ $dish->updated_at }}</td>
+          <td class="text-center">
+            @if ($dish->is_visible)
+              <i class="bi bi-eye-fill text-success"></i>
+            @else
+              <i class="bi bi-eye-slash-fill text-danger"></i>
+            @endif
+          </td>
+          <td class="text-end">
+            <a href="{{ route('admin.dishes.show', $dish->id) }}"
+              class="bi bi-box-arrow-in-up-right btn p-0 border-0"></a>
+            <a href="{{ route('admin.dishes.edit', $dish->id) }}" class="bi bi-brush btn p-0 border-0 ms-1"></a>
+
+            <button class="bi bi-trash3 text-danger btn-icon" data-bs-toggle="modal"
+              data-bs-target="#delete-modal-{{ $dish->id }}">
+            </button>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        @forelse ($dishes as $dish)
-          <tr>
-            <th scope="row">{{ $dish->id }}</th>
-            <td>{{ $dish->name }}</td>
-            <td>{{ $dish->getAbstract() }}</td>
-            <td>€{{ number_format((float) $dish->price, 2, '.', '') }}</td>
-            <td>{{ $dish->updated_at }}</td>
-            <td class="text-center">
-              @if ($dish->is_visible)
-                <i class="bi bi-eye-fill text-success"></i>
-              @else
-                <i class="bi bi-eye-slash-fill text-danger"></i>
-              @endif
-            </td>
-            <td class="text-end">
-              <a href="{{ route('admin.dishes.show', $dish->id) }}"
-                class="bi bi-box-arrow-in-up-right btn btn-link p-0 border-0"></a>
-              <a href="{{ route('admin.dishes.edit', $dish->id) }}"
-                class="bi bi-brush btn btn-link p-0 border-0 ms-1"></a>
+      @empty
+        <tr>
+          <td class="text-center" colspan="7">Nessun piatto trovato</td>
+        </tr>
+      @endforelse
+    </tbody>
+  </table>
 
-              <button class="bi bi-trash3 text-danger btn-icon" data-bs-toggle="modal"
-                data-bs-target="#delete-modal-{{ $dish->id }}">
-              </button>
-            </td>
-          </tr>
-        @empty
-          <tr>
-            <td class="text-center" colspan="7">Nessun piatto trovato</td>
-          </tr>
-        @endforelse
-      </tbody>
-    </table>
-
-    {{ $dishes->links('pagination::bootstrap-5') }}
-  </div>
+  {{ $dishes->links('pagination::bootstrap-5') }}
 @endsection
 
 @section('modals')
@@ -95,7 +91,6 @@
           </div>
         </div>
       </div>
-    </div>
-  @empty
+    @empty
   @endforelse
 @endsection

@@ -22,22 +22,22 @@
   @vite(['resources/js/app.js'])
 </head>
 
-  <body>
-    <div id="app">
-      @include('layouts.partials.navbar')
+<body>
+  <div id="app">
+    @include('layouts.partials.navbar')
 
-      <main class="container">
+    <main class="container">
 
-        <div class="d-flex justify-content-between align-items-center my-4">
-          <h2 class="title">@yield('title')</h2>
-          @yield('actions')                
-        </div>
-        
-        @yield('content')
-      </main>
-    </div>
+      <div class="d-flex justify-content-between align-items-center my-4">
+        <h2 class="title">@yield('title')</h2>
+        @yield('actions')
+      </div>
 
-    @yield('modals')
-  </body>
+      @yield('content')
+    </main>
+  </div>
+
+  @yield('modals')
+</body>
 
 </html>
