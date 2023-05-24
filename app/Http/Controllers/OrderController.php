@@ -17,7 +17,7 @@ class OrderController extends Controller
     {
         $orders = Order::with('dishes')
         ->where('restaurant_id', Auth::id())
-        ->get();
+        ->paginate(10);
 
         // dd($orders);
         return view('admin.orders.index', compact('orders'));
