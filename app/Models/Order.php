@@ -9,12 +9,19 @@ class Order extends Model
 {
     use HasFactory;
 
+    // RELATIONS
     public function restaurant() {
         return $this->belongsTo(Restaurant::class);
     }
 
     public function dishes() {
-        return $this->belongsToMany(Dish::class);
+        return $this->belongsToMany(Dish::class)->withPivot('quantity');
+    }
+
+    // MUTATORS
+    protected function getCreatedAtAttribute($value)
+    {
+        return date('d/m/y H:i', strtotime($value));
     }
 
     protected $fillable = ['restaurant_id',
