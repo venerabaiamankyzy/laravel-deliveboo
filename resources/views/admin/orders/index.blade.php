@@ -4,14 +4,16 @@
 
 
 @section('content')
-    <div class="container">
+  <div class="container">
 
-        <ul>
-            @foreach ($orders as $order)
-                {{-- @dd($order) --}}
-                <li>{{ $order->customer_name }} , {{ $order->customer_surname }}, €{{ $order->dish_id }}</li>
-            @endforeach
-        </ul>
+    <ul>
+      @foreach ($orders as $order)
+        @foreach ($order->dishes as $dish)
+          @dd($dish->pivot->quantity)
+        @endforeach
+        <li>{{ $order->customer_name }} , {{ $order->customer_surname }}, €{{ $order->dishes }}</li>
+      @endforeach
+    </ul>
 
-    </div>
+  </div>
 @endsection
