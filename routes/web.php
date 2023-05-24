@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DishController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,11 +24,17 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Route dei Piatti
 Route::middleware(['auth'])->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/dishes/trash', [DishController::class, 'trash'])->name('dishes.trash');
     Route::put('/dishes/{dish}/restore', [DishController::class, 'restore'])->name('dishes.restore');
     Route::delete('/dishes/{dish}/force-delete', [DishController::class, 'forceDelete'])->name('dishes.force-delete');
     Route::resource('dishes', DishController::class);
+});
+
+// Route degli ordini
+Route::middleware(['auth'])->prefix('/admin')->name('admin.')->group(function () {
+    Route::resource('orders', OrderController::class);
 });
 
 Route::middleware('auth')->group(function () {
@@ -36,4 +43,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

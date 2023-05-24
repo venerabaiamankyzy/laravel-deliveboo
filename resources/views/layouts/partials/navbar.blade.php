@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-md shadow-sm">
-  <div class="container">
-    <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-      <div class="logo_laravel">
-        <img src="{{ asset('./img/logo-white.svg')}}" alt="" class="img-fluid">
-      </div>
-      
-    </a>
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+            <div class="logo_laravel">
+                <img src="{{ asset('./img/logo-white.svg') }}" alt="" class="img-fluid">
+            </div>
+
+        </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -17,9 +17,6 @@
             <ul class="navbar-nav me-auto navbar-dark ">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.dishes.index') }}">{{ __('Piatti') }}</a>
                 </li>
             </ul>
 
@@ -36,6 +33,10 @@
                         </li>
                     @endif
                 @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.dishes.index') }}">{{ __('Piatti') }}</a>
+                        <a class="nav-link" href="{{ route('admin.orders.index') }}">{{ __('Ordini') }}</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
