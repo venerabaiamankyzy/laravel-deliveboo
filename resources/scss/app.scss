@@ -45,7 +45,40 @@
     background-color: $main-color;
     border: $main-color;
     color: white;
+
+    &:hover {
+        background-color: $main-color-hover;
+    }
 }
 .btn-hover-bg {
     background-color: $main-color-hover;
+}
+
+thead {
+    background-color: $main-color;
+    color: white;
+}
+
+//table index
+.btn-success {
+    background-color: $main-color;
+    border: 1px solid $main-color;
+
+    &:hover {
+        background-color: $main-color-hover;
+    }
+}
+
+.btn-outline-secondary {
+    color: $main-color;
+    border: 1px solid $main-color;
+
+    &:hover {
+        background-color: $main-color-hover;
+    }
+}
+
+button {
+    border: none;
+    background-color: transparent;
 }
