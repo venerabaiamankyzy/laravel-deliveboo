@@ -9,6 +9,7 @@ use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class DishController extends Controller
 {
@@ -100,17 +101,22 @@ class DishController extends Controller
     {
         $data = $request->all();
 
-        $this->validation($data);
+        $this->validation($data, false);
 
         if (!$request->has('is_visible')) $data['is_visible'] = 0;
         $data['restaurant_id'] = Auth::id();
 
         //* Metodo caricamento immagine 
-
-        if (Arr::exists($data, 'photo')) {
-            if ($dish->photo) Storage::delete($dish->photo);
+        if ($request->hasFile('photo')) {
+            // Se è stata fornita una nuova immagine, caricala
+            if ($dish->photo) {
+                Storage::delete($dish->photo);
+            }
             $img_path = Storage::put('uploads/dishes', $data['photo']);
-            $data['photo'] =  $img_path;
+            $data['photo'] = $img_path;
+        } else {
+            // Se non è stata fornita una nuova immagine, mantieni l'immagine esistente
+            unset($data['photo']);
         }
 
         $dish->fill($data);
@@ -185,17 +191,23 @@ class DishController extends Controller
             ->with('message_content', "Piatto $id ripristinato");
     }
 
-    private function validation($data)
+    private function validation($data, $isRequiredPhoto = true)
     {
+
+        $rules = [
+            'name' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'price' => ['required', 'numeric', 'between:0,9999.99'],
+        ];
+
+        if ($isRequiredPhoto) {
+            $rules['photo'] = ['required', 'image', 'mimes:png,jpg,jpeg'];
+        }
+
+
         return Validator::make(
             $data,
-            [
-
-                'name' => ['required', 'string'],
-                'description' => ['required', 'string'],
-                'price' => ['required', 'numeric', 'between:0,9999.99'],
-                'photo' => ['required', 'image', 'mimes:png,jpg,jpeg'],
-            ],
+            $rules,
             [
                 'name.required' => 'Il campo nome è obbligatorio',
                 'name.string' => 'Il campo nome deve essere una stringa',
