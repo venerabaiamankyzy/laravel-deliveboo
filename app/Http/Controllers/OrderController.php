@@ -52,6 +52,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        if ($order->restaurant_id != Auth::id()) abort(403);
+
         return view('admin.orders.show', compact('order'));
     }
 
