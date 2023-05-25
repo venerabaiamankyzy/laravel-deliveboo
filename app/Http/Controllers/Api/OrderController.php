@@ -3,19 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Mail\OrderConfirmed;
-use App\Mail\RestaurantMail;
 use App\Models\Order;
 use App\Models\Dish;
-<<<<<<< HEAD
-use App\Models\Restaurant;
-=======
 use Braintree\Configuration;
 use Braintree\Transaction;
->>>>>>> 0b16f13a8c847669e18df85ed7b4128a1d640574
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -111,17 +104,12 @@ class OrderController extends Controller
         // Salvo l'ordine
         $order->save();
 
-
         // Per ogni piatto attacco la quantità
         for ($i = 0; $i < count($dishesArray); $i++) {
             // Attacco l'id del piatto nella tabella ponte
             $order->dishes()->attach($dishesArray[$i], ['quantity' => $quantityArray[$i]]);
         }
-       
-        $restaurant = Restaurant::where('id', $dishes[0]['restaurant_id'])->first();
-        Mail::to($restaurant->user->email)->send(new RestaurantMail($restaurant, $order));
-   
-        Mail::to($order->email)->send(new OrderConfirmed($order, $dishes));
+
         return response()->json([
             'success' => true,
         ]);
@@ -135,9 +123,5 @@ class OrderController extends Controller
             'errors' => $errors,
         ], 422);
     }
-<<<<<<< HEAD
-}
-=======
 }
 }
->>>>>>> 0b16f13a8c847669e18df85ed7b4128a1d640574
