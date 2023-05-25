@@ -32,7 +32,7 @@ class Dish extends Model
         return date('d/m/y H:i', strtotime($value));
     }
 
-    public function getAbstract($max = 50)
+    public function getAbstract($max = 70)
     {
         return substr($this->description, 0, $max) . "...";
     }

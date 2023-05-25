@@ -118,17 +118,6 @@ class DishController extends Controller
             // Se non è stata fornita una nuova immagine, mantieni l'immagine esistente
             unset($data['photo']);
         }
-        if ($request->hasFile('photo')) {
-            // Se è stata fornita una nuova immagine, caricala
-            if ($dish->photo) {
-                Storage::delete($dish->photo);
-            }
-            $img_path = Storage::put('uploads/dishes', $data['photo']);
-            $data['photo'] = $img_path;
-        } else {
-            // Se non è stata fornita una nuova immagine, mantieni l'immagine esistente
-            unset($data['photo']);
-        }
 
         $dish->fill($data);
         $dish->update();
