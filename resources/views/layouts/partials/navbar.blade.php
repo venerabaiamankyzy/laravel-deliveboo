@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md shadow-sm">
   <div class="container">
-    <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+    <a class="navbar-brand d-flex align-items-center" href="{{ route('dashboard') }}">
       <div class="logo_laravel">
         <img src="{{ asset('./img/logo-white.svg') }}" alt="" class="img-fluid">
       </div>
@@ -13,12 +13,6 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- Left Side Of Navbar -->
-      <ul class="navbar-nav me-auto navbar-dark ">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
-        </li>
-      </ul>
 
       <!-- Right Side Of Navbar -->
       <ul class="navbar-nav  navbar-dark ml-auto">
