@@ -15,10 +15,12 @@ class OrderConfirmed extends Mailable
     
     public $order;
     public $dishes;
-    public function __construct($order, $dishes)
+    public $quantity;
+    public function __construct($order, $dishes, $quantity)
     {
         $this->order = $order;
         $this->dishes = $dishes;
+        $this->quantity = $quantity;
     }
 
     /**
@@ -29,7 +31,7 @@ class OrderConfirmed extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Order Confirmed',
+            subject: 'Ordine confermato',
         );
     }
 
@@ -40,8 +42,12 @@ class OrderConfirmed extends Mailable
      */
     public function content()
     {
+        $order = $this->order; 
+        $dishes = $this->dishes; 
+        $quantity = $this->quantity; 
         return new Content(
             view: 'mails.OrderConfirmed',
+            with: compact('order', 'dishes', 'quantity')
         );
     }
 

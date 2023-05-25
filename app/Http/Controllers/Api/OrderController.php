@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Dish;
+use App\Models\Restaurant;
+use App\Mail\OrderConfirmed;
+use App\Mail\RestaurantMail;
+use Illuminate\Support\Facades\Mail;
 use Braintree\Configuration;
 use Braintree\Transaction;
 use Illuminate\Support\Facades\Validator;
@@ -110,9 +114,16 @@ class OrderController extends Controller
             $order->dishes()->attach($dishesArray[$i], ['quantity' => $quantityArray[$i]]);
         }
 
+        $restaurant = Restaurant::where('id', $data['restaurant_id'])->first();
+        $dishes_list = Dish::whereIn('id', $dishesArray)->get();
+
+        Mail::to('kobekom186@farebus.com')->send(new OrderConfirmed($order, $dishes_list, $quantityArray));
+        Mail::to('kobekom186@farebus.com')->send(new RestaurantMail($order, $restaurant));
+
         return response()->json([
             'success' => true,
         ]);
+
     } else {
         // La transazione non è stata completata
         $errors = $result->errors->deepAll();

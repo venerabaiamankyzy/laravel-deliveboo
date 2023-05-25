@@ -13,17 +13,17 @@ class RestaurantMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $restaurant;
     protected $order;
+    protected $restaurant;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($restaurant, $order)
+    public function __construct($order, $restaurant)
     {
-        $this->restaurant = $restaurant;
         $this->order = $order;
+        $this->restaurant = $restaurant;
     }
 
     /**
@@ -46,7 +46,7 @@ class RestaurantMail extends Mailable
     public function content()
     {   
         $order = $this->order; 
-        $restaurant = $this->restaurant;
+        $restaurant = $this->restaurant; 
         $order_link = "http://127.0.0.1:8000/admin/orders/" . $order->id;
         return new Content(
             view: 'mails.OrderReceived',
