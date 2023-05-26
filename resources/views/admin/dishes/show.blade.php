@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('content')
-  <h2 class="mt-4">Aggiungi piatto</h2>
+@section('title', 'Aggiungi piatto')
 
-  <div class="my-4 d-flex">
+@section('actions')
+  <div class="d-flex gap-3">
     <a href="{{ route('admin.dishes.index') }}" class="btn btn-primary text-white">
       <i class="bi bi-arrow-bar-left"></i>
       Torna alla lista</a>
@@ -11,7 +11,9 @@
       <i class="bi bi-brush"></i>
       Modifica</a>
   </div>
+@endsection
 
+@section('content')
   <div class="row">
     <div class="col-6 align-items-stretch d-flex">
       <div class="dish_details border border-dark p-4 w-100">

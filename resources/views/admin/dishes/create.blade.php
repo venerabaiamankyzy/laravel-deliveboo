@@ -3,7 +3,7 @@
 @section('title', 'Aggiungi piatto')
 
 @section('actions')
-  <div class="my-4">
+  <div class="">
     <a href="{{ route('admin.dishes.index') }}" type="submit" class="btn btn-primary text-white ms-auto">
       <i class="bi bi-arrow-bar-left"></i>
       Torna alla lista

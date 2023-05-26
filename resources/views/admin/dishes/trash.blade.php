@@ -3,7 +3,7 @@
 @section('title', 'Cestino')
 
 @section('actions')
-  <div id="buttons" class="d-flex my-4">
+  <div id="buttons" class="d-flex">
     <a href="{{ route('admin.dishes.index') }}" type="button" class="btn btn-primary text-white ms-auto">Torna alla
       lista</a>
   </div>
