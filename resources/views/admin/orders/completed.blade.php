@@ -29,7 +29,7 @@
           <td>{{ $order->customer_phone_number }}</td>
           <td>{{ $order->customer_address }}</td>
           <td>€ {{ number_format((float) $order->total_amount, 2, '.', '') }}</td>
-          <td>{{ $order->created_at }}</td>
+          <td>{{ $order->formatted_created_at }}</td>
           <td class="text-center">
             @if ($order->status == 0)
               <span class="badge rounded-pill text-bg-warning">In corso</span>

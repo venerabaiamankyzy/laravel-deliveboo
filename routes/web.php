@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +21,7 @@ Route::get('/', function () {
     return redirect('dashboard');
 })->middleware(['auth', 'verified']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route dei Piatti
 Route::middleware(['auth'])->prefix('/admin')->name('admin.')->group(function () {

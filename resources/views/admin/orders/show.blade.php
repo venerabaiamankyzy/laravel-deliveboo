@@ -46,7 +46,7 @@
           </div>
           <div class="mb-3">
             <span class="fw-bold">Data ordine: </span>
-            <span>{{ $order->created_at }}</span>
+            <span>{{ $order->formatted_created_at }}</span>
           </div>
           <div class="mb-3">
             <span class="fw-bold">Stato: </span>

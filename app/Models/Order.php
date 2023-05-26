@@ -19,8 +19,9 @@ class Order extends Model
     }
 
     // MUTATORS
-    protected function getCreatedAtAttribute($value)
+    public function getFormattedCreatedAtAttribute()
     {
+        $value = $this->created_at;
         return date('d/m/y H:i', strtotime($value));
     }
 
