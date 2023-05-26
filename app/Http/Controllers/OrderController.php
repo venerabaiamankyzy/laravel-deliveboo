@@ -16,7 +16,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::with('dishes')
-            ->where('restaurant_id', Auth::id())
+            ->where('restaurant_id', Auth::id())->where('status', 0)->orderBy('created_at', 'DESC')
             ->paginate(10);
 
         // dd($orders);
@@ -77,7 +77,11 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $data = $request->all();
+        $order->status = $data['option'];
+        $order->update();
+
+        return view('admin.orders.show', compact('order'));
     }
 
     /**
@@ -89,5 +93,21 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    /**
+     * Display a listing of the completed orders.
+     *
+     * @param  \App\Models\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function completed()
+    {
+        $orders = Order::with('dishes')
+            ->where('restaurant_id', Auth::id())->where('status', 1)->orderBy('created_at', 'DESC')
+            ->paginate(10);
+
+        // dd($orders);
+        return view('admin.orders.completed', compact('orders'));
     }
 }

@@ -2,6 +2,11 @@
 
 @section('title', 'Lista Ordini')
 
+@section('actions')
+  <a href="{{ url()->previous() }}" class="btn btn-primary text-white">
+    <i class="bi bi-arrow-bar-left"></i>
+    Torna alla lista</a>
+@endsection
 
 @section('content')
   <div class="row mt-2 gx-4 gy-4 gy-lg-0">
@@ -44,8 +49,23 @@
             <span>{{ $order->created_at }}</span>
           </div>
           <div class="mb-3">
-            <span class="fw-bold">Status: </span>
-            <span>{{ $order->status }}</span>
+            <span class="fw-bold">Stato: </span>
+            <form id="myForm_{{ $order->id }}" action="{{ route('admin.orders.update', $order->id) }}" method="post">
+              @csrf
+              @method('PUT')
+              <select name="option" onchange="submitForm({{ $order->id }})">
+                <option class="bg-primary" value="0" @if ($order->status == 0) selected="selected" @endif>In
+                  corso</option>
+                <option class="bg-primary" value="1" @if ($order->status == 1) selected="selected" @endif>
+                  Completato</option>
+              </select>
+            </form>
+
+            <script>
+              function submitForm(orderId) {
+                document.getElementById("myForm_" + orderId).submit();
+              }
+            </script>
           </div>
           <div class="mb-3">
             <span class="fw-bold">Note: </span>

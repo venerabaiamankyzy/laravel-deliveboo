@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Lista ordini in corso')
+@section('title', 'Lista ordini completati')
 
 @section('actions')
-  <a href="{{ route('admin.orders.completed') }}" class="btn btn-success text-white">
-    Ordini completati</a>
+  <a href="{{ route('admin.orders.index') }}" class="btn btn-primary text-white">
+    Ordini in corso</a>
 @endsection
 
 @section('content')
@@ -44,7 +44,7 @@
         </tr>
       @empty
         <tr>
-          <td class="text-center" colspan="8">Non ci sono ordini in corso.</td>
+          <td class="text-center" colspan="8">Non ci sono ordini completati.</td>
         </tr>
       @endforelse
     </tbody>

@@ -34,6 +34,7 @@ Route::middleware(['auth'])->prefix('/admin')->name('admin.')->group(function ()
 
 // Route degli ordini
 Route::middleware(['auth'])->prefix('/admin')->name('admin.')->group(function () {
+    Route::get('/orders/completed', [OrderController::class, 'completed'])->name('orders.completed');
     Route::resource('orders', OrderController::class);
 });
 
