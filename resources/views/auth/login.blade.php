@@ -3,11 +3,11 @@
 @section('content')
   <div class="container m-auto mt-5">
     <div class="row align-items-center rounded-2 border login mb-4">
-      <div class="col-md-6 login-head">
+      <div class="login-head col-12 col-lg-6">
         {{-- <img src="{{ asset('img/photo-restaurant.jpg') }}" class="img-fluid rounded-start" alt="restaurant-image"> --}}
       </div>
 
-      <div class="login-body col-md-6">
+      <div class="login-body col-12 col-lg-6">
         <div class="logo-img text-center ">
           <h3 class="py-3">Bentornato!</h3>
           <img src="{{ asset('img//logo-primary.png') }}" class="img-fluid w-25 rounded-2" alt="logo">
@@ -64,17 +64,15 @@
           </div>
 
           <div class="mb-4 mx-4 row">
-            <div class="col-md-8 ">
-              <button type="submit" class="btn btn-primary main-color text-white">
-                {{ __('Accedi') }}
-              </button>
+            <button type="submit" class="btn btn-primary main-color text-white">
+              {{ __('Accedi') }}
+            </button>
 
-              @if (Route::has('password.request'))
-                <a class="btn btn-link" href="{{ route('password.request') }}">
-                  {{ __('Hai dimenticato la password?') }}
-                </a>
-              @endif
-            </div>
+            @if (Route::has('password.request'))
+              <a class="btn btn-link" href="{{ route('password.request') }}">
+                {{ __('Hai dimenticato la password?') }}
+              </a>
+            @endif
           </div>
         </form>
       </div>
