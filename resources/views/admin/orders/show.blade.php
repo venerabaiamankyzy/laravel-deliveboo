@@ -3,7 +3,7 @@
 @section('title', 'Lista Ordini')
 
 @section('actions')
-  <a href="{{ url()->previous() }}" class="btn btn-primary text-white">
+  <a href="{{ route('admin.orders.index') }}" class="btn btn-primary text-white">
     <i class="bi bi-arrow-bar-left"></i>
     Torna alla lista</a>
 @endsection
